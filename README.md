@@ -23,7 +23,7 @@ curl -X POST "http://localhost:8002/create_dummy_data/10"
 ```
 10の部分には任意の数字を入力できます。この数字文データが作成されます。
 
-<span style="color: red; ">赤文字</span>
+### windowsの人はubuntuとか入れてcurl叩いてね♡
 
 
 
