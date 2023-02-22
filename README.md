@@ -17,8 +17,11 @@ ElasticSearchについて、ここで解説するつもりはないので各自�
 
 ※新しく検索データを作成したい場合は以下のコマンドを叩いてください
 curl -X DELETE localhost:8002/indices/product-index
+
 curl -X POST -H "Content-Type: application/json" localhost:8002/indices/product-index
+
 curl -X POST "http://localhost:8002/create_dummy_data/10"
+
 10の部分には任意の数字を入力できます。この数字文データが作成されます。
 
 
