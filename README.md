@@ -8,10 +8,10 @@ ElasticSearchについて、ここで解説するつもりはないので各自�
 
 ### ～実際に検索を行う手順～
 ```
-1. docker-compose up -d
-2. curl -X POST -H "Content-Type: application/json" localhost:8002/indices/product-index
-3. curl -X GET "http://localhost:8002/create_test_data"
-4. curl -X POST localhost:8002/indices/product-index/document -H "Content-Type: application/json" -d '{"keywords": {"address": ["沖縄"]}}'
+docker-compose up -d
+curl -X POST -H "Content-Type: application/json" localhost:8002/indices/product-index
+curl -X GET "http://localhost:8002/create_test_data"
+curl -X POST localhost:8002/indices/product-index/document -H "Content-Type: application/json" -d '{"keywords": {"address": ["沖縄"]}}'
 ```
 ※keywordsのaddress部分はcsvのheader値なら検索できます
 
