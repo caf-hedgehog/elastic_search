@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+  elasticsearch:
+    build:
+      context: ./elastic_search
+      dockerfile: ./Dockerfile
+    container_name: elasticsearch
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./elastic_search:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+  
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.1
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+
+  api:
+    build: 
+      context: ./api
+      dockerfile: ./Dockerfile
+    ports:
+      - "8002:8002"
+    restart: on-failure
+    tty: true
+    volumes:
+      - ./api/:/app
+    depends_on:
+      - db
+  
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: books
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    name: book
+    external: true
